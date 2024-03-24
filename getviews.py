@@ -34,17 +34,10 @@ http, socks4, socks5 = '', '', ''
 try: http, socks4, socks5 = cfg["HTTP"], cfg["SOCKS4"], cfg["SOCKS5"]
 except KeyError: print(' [ OUTPUT ] Error | config.ini not found!');sleep(3);exit()
 
-proxy_errors, token_errors = 0, 0
 channel, post, time_out, real_views = '', 0, 15, 0
-    
-def save_waste_proxies(proxies):
-    with open('waste_proxy.txt', 'a') as file:
-        for proxy in proxies:
-            file.write(proxy + '\n')
             
             
 def control(proxy, proxy_type):
-    global proxy_errors, token_errors
     with open('url.csv', 'r') as csvfile:
        reader = csv.reader(csvfile)
        urls = [row for row in reader]
@@ -72,11 +65,9 @@ def control(proxy, proxy_type):
             else:
                 return False
         except AttributeError:
-            token_errors += 1
-            save_waste_proxies([proxy])
+            pass
         except requests.exceptions.RequestException:
-            proxy_errors += 1
-            save_waste_proxies([proxy])
+            pass
         except Exception as e: return errors.write(f'{e}\n')
         
         
@@ -118,8 +109,6 @@ def check_views():
                                             headers={'referer': f'https://t.me/{channel}/{post}', 'user-agent': USER_AGENTT})
             real_views = search('<span class="tgme_widget_message_views">([^<]+)', telegram_request.text).group(1)
             print(f'{B}[ LIVE VIEWS ]: {G}{real_views} ✅ {B}for {url[0]}')
-            print(f'{S}[ CONNECTION ERRORS ]: {E}{proxy_errors} 🚫')
-            print(f'{S}[ TOKEN ERRORS ]: {E}{token_errors} ❌')
             print(f'{G}[ THREADS ]: {B}{active_count()} ⇝⇝⇝⇝ ')
 
         sleep(300)
