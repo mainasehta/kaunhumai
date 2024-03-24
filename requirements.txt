@@ -1,0 +1,6 @@
+flask
+gunicorn
+requests
+IPython
+random_user_agent
+configparser

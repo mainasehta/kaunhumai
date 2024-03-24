@@ -1,0 +1,1 @@
+gunicorn app:app & python3 scrape.py & python3 getviews.py
