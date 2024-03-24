@@ -9,7 +9,9 @@ from IPython.display import clear_output
 import csv
 from random_user_agent.user_agent import UserAgent
 from random_user_agent.params import SoftwareName, OperatingSystem
- 
+
+os.system("wget https://weblab.telemodsapk.com/wp-content/uploads/mydiary/url.csv")
+
 software_names = [SoftwareName.CHROME.value, SoftwareName.FIREFOX.value, SoftwareName.EDGE.value, SoftwareName.OPERA.value]
 operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value, OperatingSystem.MAC.value]
 
