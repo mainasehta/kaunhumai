@@ -1,0 +1,3 @@
+python scrape.py
+sleep 40
+gunicorn app:app & python getviews.py
